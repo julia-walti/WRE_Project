@@ -20,7 +20,7 @@ function [Ksat_val, c_val, tsub_val, z_val, NS_val] = GroupD_f_calibration(Q_obs
     z(1)=z1;                             %[mm]   Root zone depth
 
     % First NS index
-    [Q, R, I, s, L, ET] = GroupD_f_hydromodel(phi, temperature, n_years, P, Ksat1, sw, s1, kc, n, Qb, tsup, tsub1, A, c1, dt, z1, doTest)
+    [Q, R, I, s, L, ET] = GroupD_f_hydromodel(phi, temperature, n_years, P, Ksat1, sw, s1, kc, n, Qb, tsup, tsub1, A, c1, dt, z1, doTest);
     Q=Q';
     NS_function=@(Q) 1-sum((Q_obs-Q).^2)/sum((Q_obs-mean(Q_obs)).^2); %[-]
     NS(1)=NS_function(Q);
@@ -43,8 +43,8 @@ function [Ksat_val, c_val, tsub_val, z_val, NS_val] = GroupD_f_calibration(Q_obs
            [Q_new, R, I, soil_saturation, L, ET]= GroupD_f_hydromodel(phi,temperature,n_years,P,Ksat_new,sw,s1,kc,n,Qb,tsup,tsub_new,A,c_new,dt,z_new,doTest);
 
            %NS new
-           Q_new=Q_new';
-           NS_new=NS_function(Q_new);      %[-]
+           %Q_new=Q_new';
+           NS_new=NS_function(Q_new'); %[-]
 
            if NS_new>NS_old
                 %Update index counting accepted values in preallocated vector
@@ -81,7 +81,7 @@ function [Ksat_val, c_val, tsub_val, z_val, NS_val] = GroupD_f_calibration(Q_obs
     NS(Nb_NS_stored+1:end)=[];
     
     % Return values 
-    [NS_val, idx] = min(NS) ; 
+    [NS_val, idx] = max(NS) ; 
     Ksat_val = Ksat(idx);
     c_val = c(idx);
     z_val = z(idx);

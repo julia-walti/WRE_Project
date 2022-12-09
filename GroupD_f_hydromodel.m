@@ -125,8 +125,8 @@ if doTest % if doTest=1, check mass balance
     ET_tot=sum(ET)*dt;
     %"testS" balance for the root zone (input/output). testS = 1: necessary (but not sufficient)
     %condition for the implementation to be correct
-    testS = P_tot/(ET_tot+R_tot+L_tot+n*z*(s(end)-s(1)))
+    testS = P_tot/(ET_tot+R_tot+L_tot+n*z*(s(end)-s(1)));
     %"testQ" balance for the whole system (input/output). testQ = 1: necessary (but not sufficient)
     %condition for the implementation to be correct
-    testQ = sum(P-ET)/(sum(qsup+qsub)+n*z*(s(end)-s(1))+Vsup(end)+Vsub(end))
+    testQ = sum(P-ET)/(sum(qsup+qsub)+n*z*(s(end)-s(1))+Vsup(end)+Vsub(end));
 end

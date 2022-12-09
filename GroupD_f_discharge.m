@@ -66,10 +66,10 @@ save("Pgen_statistics_parameter.mat","P_gen_mean_monthly","Pgenstd_monthly","Alp
 
 %downscaling P HOURLY IS EMPTY-I cannot solve this problem
 Pgen_daily_matrix=Pgen_daily_matrix(:);     %[mm/d] Transforms the matrix into a column vector
-Pgen_hourly=downscaling(Pgen_daily_matrix)                     %[mm/h] Hourly generated rainfall
+Pgen_hourly=downscaling(Pgen_daily_matrix);                     %[mm/h] Hourly generated rainfall
 
 %run model with new generated rainfall
-[Q_gen, R_gen, I_gen,soil_saturation_gen,L_gen,ET_gen]=f_hydromodel(phi,temperature,Nyears_gen,Pgen_hourly,max_Kc,sw,s1,kc,n,Qb,tsup,max_tsub,A,max_c,dt,max_z,doTest);
+[Q_gen, R_gen, I_gen,soil_saturation_gen,L_gen,ET_gen]=GroupD_f_hydromodel(phi,temperature,Nyears_gen,Pgen_hourly,max_Kc,sw,s1,kc,n,Qb,tsup,max_tsub,A,max_c,dt,max_z,doTest);
 
 time_gen=2016+(0:length(Pgen_hourly)-1)/(24*365);
 
@@ -82,7 +82,7 @@ for i=1:length(Q_gen)/24
 end
 
 Q_gen_daily_matrix = reshape(Q_gen_mean_daily,365,Nyears_gen);
-Q_gen_daily=mean(Q_gen_daily_matrix,2)
+Q_gen_daily=mean(Q_gen_daily_matrix,2);
 
 for m=1:12
     Q_temp=Q_gen_daily_matrix(month_start(m):month_end(m),:);
