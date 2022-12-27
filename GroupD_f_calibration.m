@@ -79,6 +79,10 @@ function [Ksat_val, c_val, tsub_val, z_val, NS_val] = GroupD_f_calibration(Q_obs
     z(Nb_NS_stored+1:end)=[];
     tsub(Nb_NS_stored+1:end)=[];
     NS(Nb_NS_stored+1:end)=[];
+    T_SA(Nb_NS_stored+1:end)=[];
+    
+    % Save the values of the parameters during the calibration
+    writematrix([Ksat, c, z, tsub, NS, T_SA],'GroupD_calibration_res.xls') 
     
     % Return values 
     [NS_val, idx] = max(NS) ; 

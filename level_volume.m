@@ -12,4 +12,8 @@ function l=level_volume(Volume,level,V)
 %l=level correspondent to the "V" value
 
 index=find(Volume<=V,1,'last');
-l=level(index)+(level(index+1)-level(index))*(V-Volume(index))/(Volume(index+1)-Volume(index));
+a = level(index);
+b = level(index+1)-level(index);
+c = V-Volume(index);
+d = Volume(index+1)-Volume(index);
+l = a + b*c/d;

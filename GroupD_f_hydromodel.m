@@ -66,7 +66,7 @@ for year=1:n_years
             
 % Runoff generation calculations
             %Runoff R and infiltration I
-            I(t) =  min(P(t),Ksat*1000*3600);                       %[mm/h] because P is in [mm/h] et Ksat must be converted from [m/s] to [mm/h] 
+            I(t) =  min(P(t), Ksat*1000*3600);                       %[mm/h] because P is in [mm/h] et Ksat must be converted from [m/s] to [mm/h] 
             R(t) = P(t)-I(t);                                       %[mm/h]
             
 % Evapotranspiration ET computation in [mm/h]
